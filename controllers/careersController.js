@@ -1,5 +1,5 @@
-const asyncHandler = require('express-async-handler');
-const Career = require('../models/careersModel');
+import asyncHandler from 'express-async-handler';
+import Career from '../models/careersModel.js';
 
 //@des Get all careers
 //@route GET /api/careers
@@ -111,11 +111,11 @@ const deleteCareer = asyncHandler(async (req, res) => {
     res.status(200).json(career);
 });
 
-module.exports = {
+export {
     getCareers,
     createCareers,
     getCareer,
     updateCareer,
     deleteCareer,
-    getCareersByField, // Add the new function to the exports
+    getCareersByField,
 };

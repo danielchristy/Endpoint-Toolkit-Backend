@@ -1,6 +1,6 @@
-const asyncHandler = require('express-async-handler');
-const Career = require('../models/careersModel');
-const calculateScore = require('../userRecommendation/userRecommendationCalculations')
+import asyncHandler from 'express-async-handler';
+import Career from '../models/careersModel.js';
+import { calculateScore } from '../userRecommendation/userRecommendationCalculations.js';
 
 //@des Post user recommendations
 //@route POST /api/recommendations
@@ -29,6 +29,6 @@ const userRecommendation = asyncHandler(async (req, res) => {
     }
 })
 
-module.exports = {
+export {
     userRecommendation
-}
+};

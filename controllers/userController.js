@@ -1,6 +1,6 @@
-const asyncHandler = require('express-async-handler');
-const User = require("../models/userModel");
-const bcrypt = require("bcrypt");
+import asyncHandler from "express-async-handler";
+import User from "../models/userModel.js";
+import bcrypt from "bcrypt";
 
 //@des Get all users
 //@route GET /api/users
@@ -64,9 +64,9 @@ const createUser = asyncHandler(async (req, res) => {
         });
     } else {
         res.status(400);
-            console.error("User data is not valid");
-        }
-    res.json({message: "User created"});
+        console.error("User data is not valid");
+    }
+    res.json({ message: "User created" });
 });
 
 //@des Update user by ID
@@ -78,7 +78,7 @@ const updateUser = asyncHandler(async (req, res) => {
         res.status(404);
         throw new Error("User not found");
     }
-    const { first_name, last_name, username, email, password} = req.body;
+    const { first_name, last_name, username, email, password } = req.body;
     if (first_name) user.first_name = first_name;
     if (last_name) user.last_name = last_name;
     if (username) user.username = username;
@@ -101,4 +101,10 @@ const deleteUser = asyncHandler(async (req, res) => {
     res.status(200).json({ message: "User removed" });
 });
 
-module.exports = { getUsers, getUser, createUser, updateUser, deleteUser };
+export {
+    getUsers,
+    getUser,
+    createUser,
+    updateUser,
+    deleteUser
+};

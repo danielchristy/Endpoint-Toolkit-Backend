@@ -1,12 +1,13 @@
-const express = require('express');
+import express from "express";
 const router = express.Router();
-const {
+
+import {
     getApprentices,
     createApprentices,
     getApprentice,
     updateApprentice,
     deleteApprentice,
-} = require("../controllers/apprenticeController");
+} from "../controllers/apprenticeController.js";
 
 router.route("/").get(getApprentices);
 
@@ -18,4 +19,4 @@ router.route("/:id").put(updateApprentice);
 
 router.route("/:id").delete(deleteApprentice);
 
-module.exports = router;
+export default router;

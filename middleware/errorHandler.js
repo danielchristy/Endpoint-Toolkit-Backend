@@ -1,4 +1,4 @@
-const { constants } = require("../middleware/constants");
+import { constants } from "../middleware/constants.js";
 const errorHandler = (err, req, res, next) => {
     const statusCode = res.statusCode ? res.statusCode : 500;
     switch (statusCode) {
@@ -44,4 +44,4 @@ const errorHandler = (err, req, res, next) => {
 
 };
 
-module.exports = errorHandler;
+export default errorHandler;

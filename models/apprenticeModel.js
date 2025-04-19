@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const apprenticeSchema = mongoose.Schema(
     {
@@ -21,4 +21,5 @@ const apprenticeSchema = mongoose.Schema(
     }
 );
 
-module.exports = mongoose.model('Apprentices', apprenticeSchema);
+const Apprentice = mongoose.model("Apprentice", apprenticeSchema);
+export default Apprentice;

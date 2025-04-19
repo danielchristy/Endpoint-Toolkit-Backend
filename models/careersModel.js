@@ -1,9 +1,9 @@
-const mongoose = require("mongoose");
-const { type } = require("os");
+import mongoose from "mongoose";
+import os from "os";
 
 const careersSchema = mongoose.Schema(
     {
-       title: {
+        title: {
             type: String,
             required: true,
         },
@@ -20,7 +20,7 @@ const careersSchema = mongoose.Schema(
             required: true,
         },
         certifications: {
-            type: [String], 
+            type: [String],
             required: true,
         }
     },
@@ -29,4 +29,5 @@ const careersSchema = mongoose.Schema(
     }
 );
 
-module.exports = mongoose.model('Careers', careersSchema);
+const Career = mongoose.model("Career", careersSchema);
+export default Career;

@@ -1,5 +1,5 @@
-const asyncHandler = require('express-async-handler');
-const Apprentice = require('../models/apprenticeModel');
+import asyncHandler from 'express-async-handler';
+import Apprentice from '../models/apprenticeModel.js';
 
 //@des Get all apprentices
 //@route GET /api/apprentices
@@ -90,7 +90,7 @@ const deleteApprentice = asyncHandler(async (req, res) => {
 
 
 
-module.exports = {
+export {
     getApprentices,
     createApprentices,
     getApprentice,

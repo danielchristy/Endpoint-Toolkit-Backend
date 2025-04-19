@@ -1,6 +1,6 @@
-const asyncHandler = require("express-async-handler");
-const DummyData = require("../models/dummyDataModel");
-// const insertDummyData = require("../data/dummyData");
+import asyncHandler from "express-async-handler";
+import DummyData from "../models/dummyDataModel.js";
+
 
 //@des Get all dummy data
 //@route GET /api/dummydata
@@ -88,7 +88,7 @@ const deleteDummyData = asyncHandler(async (req, res) => {
     res.status(200).json(dummyData);
 });
 
-module.exports = {
+export {
     getDummyData,
     createDummyData,
     getDummyDataById,

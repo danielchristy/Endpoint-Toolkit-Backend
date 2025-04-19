@@ -1,8 +1,21 @@
-const express = require('express');
+import express from "express";
 const router = express.Router();
-const { userRecommendation } = require('../controllers/userRecommendController')
-const Career = require('../models/careersModel');
+import {
+    getDummyData,
+    createDummyData,
+    getDummyDataById,
+    updateDummyData,
+    deleteDummyData,
+} from "../controllers/dummyDataController.js";
 
-router.route("/").post(userRecommendation);
+router.route("/").get(getDummyData);
 
-module.exports = router;
+router.route("/").post(createDummyData);
+
+router.route("/:id").get(getDummyDataById);
+
+router.route("/:id").put(updateDummyData);
+
+router.route("/:id").delete(deleteDummyData);
+
+export default router;

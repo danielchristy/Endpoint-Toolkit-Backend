@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from "mongoose";
 
 const dummySchema = mongoose.Schema({
   jobTitle: { type: String, required: true },
@@ -7,7 +7,7 @@ const dummySchema = mongoose.Schema({
   wageInformation: {
     hourly: { type: Number, required: true },
     salary: { type: Number, required: true }
-},
+  },
   location: { type: String, required: true },
   skills: { type: [String], required: true },
   educationOptions: { type: [String], required: true },
@@ -15,5 +15,6 @@ const dummySchema = mongoose.Schema({
   toolsAndTechnology: { type: [String], required: true }
 });
 
-module.exports = mongoose.model('DummyData', dummySchema);
+const DummyData = mongoose.model("DummyData", dummySchema);
+export default DummyData;
 

@@ -1,12 +1,12 @@
-const express = require('express');
+import express from "express";
 const router = express.Router();
-const {
+import  {
     getDummyData,
     createDummyData,
     getDummyDataById,
     updateDummyData,
     deleteDummyData,
-} = require("../controllers/dummyDataController");
+} from "../controllers/dummyDataController.js";
 
 router.route("/").get(getDummyData);
 
@@ -18,4 +18,4 @@ router.route("/:id").put(updateDummyData);
 
 router.route("/:id").delete(deleteDummyData);
 
-module.exports = router;
+export default router;

@@ -1,9 +1,15 @@
 import dotenv from "dotenv";
+import express from "express";
+import mongoose from "mongoose";
+import cors from "cors";
 
-const express = require('express');
-const errorHandler = require('../middleware/errorHandler');
-const mongoose = require('mongoose');
-const cors = require('cors');
+import errorHandler from "../middleware/errorHandler.js";
+import userRoutes from "../routes/userRoutes.js";
+import careerRoutes from "../routes/careersRoutes.js";
+import apprenticeRoutes from "../routes/apprenticeRoutes.js";
+import dummyDataRoutes from "../routes/dummyDataRoutes.js";
+import userRecommendRoutes from "../routes/userRecommendRoutes.js";
+
 
 dotenv.config();
 
@@ -13,25 +19,26 @@ const APP_PORT = process.env.PORT;
 const main = async () => {
     const app = express();
     const port = APP_PORT;
-    mongoose.connect(APP_URI)
-        .then(() => console.log("Connected to MongoDB"))
-        .catch((err) => console.error("MongoDB connection error: ", err));
+    try {
+        await mongoose.connect(APP_URI);
+        console.log("Connected to MongoDB");
+    } catch (error) {
+        console.error("Error connecting to MongoDB:", error);
+        process.exit(1);
+    }
 
     app.use(express.json());
     app.use(cors());
-    app.use("/api/users", require("../routes/userRoutes"));
-    app.use("/api/careers", require("../routes/careersRoutes"));
-    app.use("/api/apprentices", require("../routes/apprenticeRoutes"));
-    app.use("/api/dummydata", require("../routes/dummyDataRoutes"));
+    app.use("/api/users", userRoutes);
+    app.use("/api/careers", careerRoutes);
+    app.use("/api/apprentices", apprenticeRoutes);
+    app.use("/api/dummydata", dummyDataRoutes);
+    app.use("/api/recommendations", userRecommendRoutes);
     app.use(errorHandler);
-    app.use("/api/recommendations", require("../routes/userRecommendRoutes"));
-
-
-
 
     app.listen(port, () => {
         console.log(`Server is running on port ${port}`);
     });
-}
+};
 
 main();
