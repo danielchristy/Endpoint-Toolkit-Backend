@@ -1,0 +1,13 @@
+.env
+
+/node_modules
+
+.log
+
+dist/
+build/
+
+*.tmp
+*.temp
+
+.vscode/

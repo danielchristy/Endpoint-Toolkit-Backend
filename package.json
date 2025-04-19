@@ -1,0 +1,31 @@
+{
+  "type": "module",
+  "name": "careermap-backend-api",
+  "version": "1.0.0",
+  "main": "./src/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "Brittney, Daniel, Spencer",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.8.4",
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^4.21.2",
+    "express-async-handler": "^1.2.0",
+    "lodash": "^4.17.21",
+    "mongodb": "^6.15.0",
+    "mongoose": "^8.12.2",
+    "natural": "^8.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "nodemon": "^3.1.9"
+  },
+  "description": "This is express project for career map backend api"
+}
