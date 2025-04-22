@@ -6,8 +6,6 @@ import cors from "cors";
 import errorHandler from "../middleware/errorHandler.js";
 import userRoutes from "../routes/userRoutes.js";
 import careerRoutes from "../routes/careersRoutes.js";
-import apprenticeRoutes from "../routes/apprenticeRoutes.js";
-import dummyDataRoutes from "../routes/dummyDataRoutes.js";
 import userRecommendRoutes from "../routes/userRecommendRoutes.js";
 
 
@@ -31,8 +29,6 @@ const main = async () => {
     app.use(cors());
     app.use("/api/users", userRoutes);
     app.use("/api/careers", careerRoutes);
-    app.use("/api/apprentices", apprenticeRoutes);
-    app.use("/api/dummydata", dummyDataRoutes);
     app.use("/api/recommendations", userRecommendRoutes);
     app.use(errorHandler);
 

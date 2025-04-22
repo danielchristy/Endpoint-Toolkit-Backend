@@ -1,6 +1,7 @@
 import asyncHandler from 'express-async-handler';
 import Career from '../models/careersModel.js';
 import { calculateScore } from '../userRecommendation/userRecommendationCalculations.js';
+import mongoose from 'mongoose';
 
 //@des Post user recommendations
 //@route POST /api/recommendations

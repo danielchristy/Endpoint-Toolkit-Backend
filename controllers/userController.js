@@ -28,8 +28,8 @@ const getUser = asyncHandler(async (req, res) => {
 //@access Public
 const createUser = asyncHandler(async (req, res) => {
     // console.log("The request body is", req.body);
-    const { first_name, last_name, username, email, password } = req.body;
-    if (!first_name || !last_name || !username || !email || !password) {
+    const { first_name, last_name, email, password, skills, certifications } = req.body;
+    if (!first_name || !last_name || !email || !password || !skills || !certifications) {
         res.status(400);
         throw new Error("Please enter all fields");
     }
@@ -43,9 +43,10 @@ const createUser = asyncHandler(async (req, res) => {
     const user = await User.create({
         first_name,
         last_name,
-        username,
         email,
         password: hashedPassword,
+        skills,
+        certifications,
     });
 
     if (user) {
@@ -53,7 +54,6 @@ const createUser = asyncHandler(async (req, res) => {
             _id: user._id,
             first_name: user.first_name,
             last_name: user.last_name,
-            username: user.username,
             email: user.email,
         });
     } else {
@@ -82,7 +82,6 @@ const loginUser = asyncHandler(async (req, res) => {
             _id: user._id,
             first_name: user.first_name,
             last_name: user.last_name,
-            username: user.username,
             email: user.email,
             token,
         });
@@ -105,17 +104,19 @@ const updateUser = asyncHandler(async (req, res) => {
     const { first_name, last_name, username, email, password } = req.body;
     if (first_name) user.first_name = first_name;
     if (last_name) user.last_name = last_name;
-    if (username) user.username = username;
     if (email) user.email = email;
     if (password) user.password = password;
+    if (skills) user.skills = skills;
+    if (certifications) user.certifications = certifications;
 
     const updatedUser = await user.save();
     res.status(200).json({
         _id: updatedUser._id,
         first_name: updatedUser.first_name,
         last_name: updatedUser.last_name,
-        username: updatedUser.username,
         email: updatedUser.email,
+        skills: updatedUser.skills,
+        certifications: updatedUser.certifications,
     });
 });
 

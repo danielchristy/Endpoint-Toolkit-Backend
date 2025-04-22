@@ -1,21 +1,24 @@
 import express from "express";
 const router = express.Router();
 import {
-    getDummyData,
-    createDummyData,
-    getDummyDataById,
-    updateDummyData,
-    deleteDummyData,
-} from "../controllers/dummyDataController.js";
+    getCareers,
+    createCareers,
+    getCareer,
+    getCareersByField,
+    updateCareer,
+    deleteCareer,
+} from "../controllers/careersController.js";
 
-router.route("/").get(getDummyData);
+router.route("/").get(getCareers);
 
-router.route("/").post(createDummyData);
+router.route("/").post(createCareers);
 
-router.route("/:id").get(getDummyDataById);
+router.route("/:id").get(getCareer);
 
-router.route("/:id").put(updateDummyData);
+router.route("/:id").put(updateCareer);
 
-router.route("/:id").delete(deleteDummyData);
+router.route("/:id").delete(deleteCareer);
+
+router.route("/field/:field").get(getCareersByField);
 
 export default router;
