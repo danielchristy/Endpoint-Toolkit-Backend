@@ -51,27 +51,6 @@ app.get("/occupation/details/:code", async (req, res) => {
     }
 });
 
-//DON"T WORRY ABOUT THIS CODE RIGHT NOW, THE CALL ABOVER IS WORKING BASICALLY HOW I WANTED THIS ONE TO WORK
-
-// app.get("/search/:keyword", async (req, res) => {
-//     const keyword = req.params.keyword;
-//     const url = `https://api.careeronestop.org/v1/occupation/${CAREER_ONE_STOP_ID}/search/${keyword}/national/0/10`;
-
-//     try {
-//         const response = await axios.get(url, {
-//             headers: {
-//                 "Authorization": `Bearer ${CAREER_ONE_STOP_KEY}`,
-//                 "Accept": "application/json"
-//             }
-//         });
-
-//         res.json(response.data);
-//     } catch (error) {
-//         console.error("Error fetching search data:", error.response?.data || error.message);
-//         res.status(error.response?.status || 500).json({ error: "Failed to fetch search results" });
-//     }
-// });
-
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
