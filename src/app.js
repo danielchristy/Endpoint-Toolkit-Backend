@@ -14,6 +14,11 @@ dotenv.config();
 const APP_URI = process.env.MONGO_URI;
 const APP_PORT = process.env.PORT;
 
+const allowedOrigins = [
+    'https://devwaypoint.xyz',
+    'http://localhost:3000'
+];
+
 const main = async () => {
     const app = express();
     const port = APP_PORT;
@@ -26,7 +31,9 @@ const main = async () => {
     }
 
     app.use(express.json());
-    app.use(cors());
+    app.use(cors({
+        origin: allowedOrigins
+    }));
     app.use("/api/users", userRoutes);
     app.use("/api/careers", careerRoutes);
     app.use("/api/recommendations", userRecommendRoutes);
