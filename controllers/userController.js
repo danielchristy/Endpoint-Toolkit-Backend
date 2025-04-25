@@ -95,41 +95,59 @@ const loginUser = asyncHandler(async (req, res) => {
 //@route PUT /api/users/:id
 //@access Public
 const updateUser = asyncHandler(async (req, res) => {
-    const user = await User.findById(req.params.id);
-    if (!user) {
-        res.status(404);
-        throw new Error("User not found");
-    }
-    const { first_name, last_name, username, email, password } = req.body;
-    if (first_name) user.first_name = first_name;
-    if (last_name) user.last_name = last_name;
-    if (email) user.email = email;
-    if (password) user.password = password;
-    if (skills) user.skills = skills;
-    if (certifications) user.certifications = certifications;
+    try {
+        const user = await User.findById(req.params.id);
+        if (!user) {
+            res.status(404);
+            throw new Error("User not found");
+        }
 
-    const updatedUser = await user.save();
-    res.status(200).json({
-        _id: updatedUser._id,
-        first_name: updatedUser.first_name,
-        last_name: updatedUser.last_name,
-        email: updatedUser.email,
-        skills: updatedUser.skills,
-        certifications: updatedUser.certifications,
-    });
+        const { first_name, last_name, email, password, skills, certifications } = req.body;
+
+        // Update fields if they exist in the request
+        if (first_name) user.first_name = first_name;
+        if (last_name) user.last_name = last_name;
+        if (email) user.email = email;
+        if (password) {
+            const hashedPassword = await bcrypt.hash(password, 10);
+            user.password = hashedPassword;
+        }
+        if (skills) user.skills = skills;
+        if (certifications) user.certifications = certifications;
+
+        const updatedUser = await user.save();
+
+        res.status(200).json({
+            _id: updatedUser._id,
+            first_name: updatedUser.first_name,
+            last_name: updatedUser.last_name,
+            email: updatedUser.email,
+            skills: updatedUser.skills,
+            certifications: updatedUser.certifications,
+        });
+    } catch (error) {
+        console.error("Update error:", error);
+        res.status(500).json({ message: "Update failed", error: error.message });
+    }
 });
 
 //@des Delete user by ID
 //@route DELETE /api/users/:id
 //@access Public
 const deleteUser = asyncHandler(async (req, res) => {
-    const user = await User.findById(req.params.id);
-    if (!user) {
-        res.status(404);
-        throw new Error("User not found");
+    try {
+        const result = await User.findByIdAndDelete(req.params.id);
+
+        if (!result) {
+            res.status(404);
+            throw new Error("User not found");
+        }
+
+        res.status(200).json({ message: "User removed" });
+    } catch (error) {
+        console.error("Delete error:", error);
+        res.status(500).json({ message: "Delete failed", error: error.message });
     }
-    await user.remove();
-    res.status(200).json({ message: "User removed" });
 });
 
 export {

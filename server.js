@@ -76,3 +76,7 @@ app.use(errorHandler);
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server running on port ${PORT}`);
 });
+
+process.on('UnhandledRejection at:', (reason, promise) => {
+    console.log('Unhandled Rejection at:', promise, 'reason', reason);
+});
