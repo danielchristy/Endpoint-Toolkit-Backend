@@ -29,7 +29,7 @@ const getUser = asyncHandler(async (req, res) => {
 const createUser = asyncHandler(async (req, res) => {
     // console.log("The request body is", req.body);
     const { first_name, last_name, email, password, skills, certifications } = req.body;
-    if (!first_name || !last_name || !email || !password || !skills || !certifications) {
+    if (!first_name || !last_name || !email || !password) {
         res.status(400);
         throw new Error("Please enter all fields");
     }
@@ -45,8 +45,8 @@ const createUser = asyncHandler(async (req, res) => {
         last_name,
         email,
         password: hashedPassword,
-        skills,
-        certifications,
+        skills: skills || [],
+        certifications: certifications || [],
     });
 
     if (user) {
@@ -60,7 +60,6 @@ const createUser = asyncHandler(async (req, res) => {
         res.status(400);
         console.error("User data is not valid");
     }
-    res.json({ message: "User created" });
 });
 
 //@desc Login user
