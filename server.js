@@ -35,7 +35,7 @@ app.use("/api/recommendations", userRecommendRoutes);
 
 app.get("/occupation/:code", async (req, res) => {
     const socCode = req.params.code;
-    const url = `https://api.careeronestop.org/v1/occupation/${CAREER_ONE_STOP_ID}/${socCode}/national/0/10`;
+    const url = `https://api.careeronestop.org/v1/occupation/${CAREER_ONE_STOP_ID}/${socCode}/national/0/500`;
 
     try {
         const response = await axios.get(url, {
