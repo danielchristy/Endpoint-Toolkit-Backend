@@ -1,5 +1,14 @@
 import mongoose from "mongoose";
 
+const certificationSchema = new mongoose.Schema({
+    startDate: String,
+    dueDate: String,
+    title: String,
+    subtitle: String,
+    milestones: [String],
+    completedMilestones: [String],
+  }, { _id: false });
+
 const userSchema = mongoose.Schema(
     {
         first_name: {
@@ -24,10 +33,7 @@ const userSchema = mongoose.Schema(
             type: [String],
             default: [],
         },
-        certifications: {
-            type: [String],
-            default: [],
-        },
+        certifications: [certificationSchema],
     },
     {
         timestamps: true,
